@@ -118,9 +118,9 @@ class App extends React.Component{
     }
 
     calcExamples(examples){
+        this.reset();
         const history = this.state.history;
         const result = examples.map(example =>example + ' = ' +  eval(example));
-        console.log(result);
         this.setState({
             history: history.concat(result),
             display: history[history.length-1],
