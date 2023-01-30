@@ -82,7 +82,13 @@ class App extends React.Component{
     }
 
     handleResetClick(){
-        this.reset();
+        this.setState({
+            display: '',
+            operation: null,
+            prevNumber: 0,
+            currentNumber: '',
+            isOperation: false,
+        });
     }
 
     handleResetHistory(){
@@ -118,23 +124,11 @@ class App extends React.Component{
     }
 
     calcExamples(examples){
-        this.reset();
-        const history = this.state.history;
         const result = examples.map(example =>example + ' = ' +  eval(example));
+        const history = this.state.history.concat(result);
         this.setState({
-            history: history.concat(result),
-            display: history[history.length-1],
+            history: history,
         })
-    }
-
-    reset(){
-        this.setState({
-            display: '',
-            operation: null,
-            prevNumber: 0,
-            currentNumber: '',
-            isOperation: false,
-        });
     }
 
     render() {
