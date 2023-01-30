@@ -132,7 +132,7 @@ class App extends React.Component{
         const operators = ['+','-','*','/'];
 
         const result = examples.map(example =>{
-            for(let i = 0; i<=example.length; i++){
+            for(let i = 0; i <= example.length; i++){
                 for(let j = 0; j <= operators.length; j++){
                     if(example[i] === operators[j]){
                         x = (example.split(operators[j]))[0];
