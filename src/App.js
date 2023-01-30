@@ -13,6 +13,7 @@ class App extends React.Component{
             currentNumber: '',
             isOperation: false,
             history: [],
+            examples: [],
         };
     }
     handleClick(i){
@@ -81,13 +82,7 @@ class App extends React.Component{
     }
 
     handleResetClick(){
-        this.setState({
-            display: '',
-            operation: null,
-            prevNumber: 0,
-            currentNumber: '',
-            isOperation: false,
-        });
+        this.reset();
     }
 
     handleResetHistory(){
@@ -97,14 +92,10 @@ class App extends React.Component{
     }
 
     handleGetClick(){
-        const response = fetch("http://localhost:8080/math/examples?count=4", {
-            method: 'GET',
-            crossorigin: true,
-            mode: "no-cors"
-        })
+        fetch("http://localhost:8080/math/examples?count=4")
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
+                this.calcExamples(data);
             })
             .catch((error) => {
                 console.log(error)
@@ -124,6 +115,26 @@ class App extends React.Component{
         if(o === '*'){
             return x*y;
         }
+    }
+
+    calcExamples(examples){
+        const history = this.state.history;
+        const result = examples.map(example =>example + ' = ' +  eval(example));
+        console.log(result);
+        this.setState({
+            history: history.concat(result),
+            display: history[history.length-1],
+        })
+    }
+
+    reset(){
+        this.setState({
+            display: '',
+            operation: null,
+            prevNumber: 0,
+            currentNumber: '',
+            isOperation: false,
+        });
     }
 
     render() {
