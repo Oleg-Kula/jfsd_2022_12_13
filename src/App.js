@@ -16,6 +16,7 @@ class App extends React.Component{
             examples: [],
         };
     }
+
     handleClick(i){
         this.setState({
             currentNumber: Number('' + this.state.currentNumber + i),
@@ -124,7 +125,27 @@ class App extends React.Component{
     }
 
     calcExamples(examples){
-        const result = examples.map(example =>example + ' = ' +  eval(example));
+        let x;
+        let y;
+        let o;
+        let string = '';
+        const operators = ['+','-','*','/'];
+
+        const result = examples.map(example =>{
+            for(let i = 0; i<=example.length; i++){
+                for(let j = 0; j <= operators.length-1; j++){
+                    if(example[i] === operators[j]){
+                        x = (example.split(operators[j]))[0];
+                        x = Number(x);
+                        y = (example.split(operators[j]))[1];
+                        y = Number(y);
+                        o = operators[j];
+                        string = example + ' = ' + this.calculate(x, y, o);
+                    }
+                }
+            }
+            return string;
+        });
         const history = this.state.history.concat(result);
         this.setState({
             history: history,
@@ -173,5 +194,4 @@ class App extends React.Component{
     }
 
 }
-
 export default App;
