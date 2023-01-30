@@ -132,8 +132,8 @@ class App extends React.Component{
         const operators = ['+','-','*','/'];
 
         const result = examples.map(example =>{
-            for(let i = 0; i <= example.length; i++){
-                for(let j = 0; j <= operators.length; j++){
+            for(let i = 0; i <= example.length-1; i++){
+                for(let j = 0; j <= operators.length-1; j++){
                     if(example[i] === operators[j]){
                         x = (example.split(operators[j]))[0];
                         x = Number(x);
