@@ -133,7 +133,7 @@ class App extends React.Component{
 
         const result = examples.map(example =>{
             for(let i = 0; i<=example.length; i++){
-                for(let j = 0; j <= operators.length-1; j++){
+                for(let j = 0; j <= operators.length; j++){
                     if(example[i] === operators[j]){
                         x = (example.split(operators[j]))[0];
                         x = Number(x);
